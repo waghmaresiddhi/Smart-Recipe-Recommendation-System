@@ -1,0 +1,47 @@
+<div class="flex-auto px-6 pt-9 pb-12 md:p-8 md:pb-12 lg:p-12">
+    <div class="w-full max-w-3xl mx-auto">
+        <form [formGroup]="profileUpdateForm" *ngIf="profile$ | async as profile">
+            <div class="w-full">
+                <div class="text-xl">Personal Information</div>
+                <div class="text-secondary">About Your Profile</div>
+            </div>
+            <div class="profile-wrap  w-40 h-40 mx-auto ">
+                <img [src]="profileImage" alt="User avatar" class="custom-profile rounded-full">
+                <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="mt-5 hidden">
+                <mat-icon class="bg-primary edit-icon" svgIcon="heroicons_solid:camera" (click)="imageInput.click()" matPrefix>
+                </mat-icon>
+            </div>
+            <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+                <div class="sm:col-span-4">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Email</mat-label>
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:mail'" matPrefix></mat-icon>
+                        <input [formControlName]="'email'" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="sm:col-span-4">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Name</mat-label>
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:user'" matPrefix></mat-icon>
+                        <input [formControlName]="'name'" matInput>
+                    </mat-form-field>
+                    <mat-error *ngIf="profileUpdateForm.get('name').hasError('required')">
+                        This field is required
+                    </mat-error>
+                </div>
+            </div>
+            <div class="mt-11 mb-10 border-t"></div>
+            <div class="flex items-center justify-end">
+                <button mat-stroked-button type="button">
+                    Cancel
+                </button>
+                <button class="ml-4" mat-flat-button type="button" [color]="'primary'" (click)="updateProfile()"
+                    [disabled]="profileUpdateForm.invalid || profileUpdateForm.disabled">
+                    <span *ngIf="!profileUpdateForm.disabled">Save</span>
+                    <mat-progress-spinner *ngIf="profileUpdateForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                    </mat-progress-spinner>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+    <a class="mb-5" mat-button [routerLink]="['/e-commerce']" [color]="'primary'">
+        <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+        <span class="ml-2">Back to E-Commerce</span>
+    </a>
+    <form [formGroup]="form">
+        <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+        </formly-form>
+    </form>
+    <div class="flex flex-row justify-between mt-5">
+        <button mat-raised-button type="reset" (click)="onReset()">Clear</button>
+        <button mat-raised-button color="primary" (click)="onSave()" type="submit">Primary</button>
+    </div>
+    <!-- <app-form-debug [form]="form.value" [model]="model"></app-form-debug> -->
+</div>
+<ng-container *ngIf="apiData$ | async as apiData"></ng-container>

@@ -1,0 +1,34 @@
+  <!-- Separator -->
+  <div class="flex items-center mt-8">
+    <div class="flex-auto mt-px border-t"></div>
+    <div class="mx-2 text-secondary">Or continue with</div>
+    <div class="flex-auto mt-px border-t"></div>
+</div>
+
+<!-- Single sign-on buttons -->
+<div class="flex items-center mt-8 space-x-4">
+    <button
+        class="flex-auto"
+        type="button" (click)="signInWithFacebook()"
+        mat-stroked-button>
+        <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'feather:facebook'"></mat-icon>
+    </button>
+    <button
+        class="flex-auto"
+        type="button" (click)="signInWithGoogle()"
+        mat-stroked-button>
+        <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'google'"></mat-icon>
+    </button>
+    <a  [href]="signInWithLinkedIn()"
+        class="flex-auto"
+        type="button"
+        mat-stroked-button>
+        <mat-icon style="margin: 0 auto;display: block!important;"
+            class="icon-size-5"
+            [svgIcon]="'feather:linkedin'"></mat-icon>
+    </a>
+</div>

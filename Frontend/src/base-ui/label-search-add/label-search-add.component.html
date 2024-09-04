@@ -1,0 +1,23 @@
+<div class="w-full shadow-sm bg-white ">
+  <div style="display: grid;" class="grid-cols-3 p-4 md:mx-8">
+    <div class="flex items-center">
+      <span class="text-xl font-bold">
+        {{label}}
+      </span>
+    </div>
+    <div class="order-3 col-span-3 md:col-span-1 flex justify-center items-center ">
+      <mat-form-field class="w-full mt-4">
+        <mat-icon class="icon-size-5 w-full" [svgIcon]="'heroicons_solid:search'" matPrefix></mat-icon>
+        <input matInput #searchInput class="p-1" (input)="onSearchChange(searchInput.value)" [autocomplete]="'off'"
+        [placeholder]="searchPlaceholder">
+      </mat-form-field>
+    </div>
+    <div class="flex justify-end items-center col-span-2 md:col-span-1 md:order-last">
+      <button [routerLink]="[myRouterLink]" class="px-5" mat-flat-button [color]="'primary'"
+      *ngIf="myRouterLink">{{buttonLabel}}</button>
+      
+      <button (click)="onAddClick($event)" class="px-5" mat-flat-button [color]="'primary'"
+      *ngIf="!myRouterLink">{{buttonLabel}}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+// Image Edit Icon
+
+.profile-wrap {
+    position: relative;
+}
+.profile-wrap img {
+    height: 100%;
+    width: 100%;
+    // border-radius: 50%;
+    object-fit: cover;
+}
+.profile-wrap .edit-icon {
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    /* border: 1px solid; */
+    border-radius: 50%;
+    /* padding: 11px; */
+    height: 30px;
+    width: 30px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+}
+formly-field-mat-textarea {
+    width: 100%;
+}
+formly-field-mat-input {
+    width: 100%;
+}
+formly-field-mat-select {
+    width: 100%;
+}
