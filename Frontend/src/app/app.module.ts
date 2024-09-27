@@ -34,6 +34,7 @@ import { ArrayTypeComponent } from './shared/@components/single-components/array
 import { MultiSchemaTypeComponent } from './shared/@components/single-components/multischema.type';
 import { NullTypeComponent } from './shared/@components/single-components/null.type';
 import { ObjectTypeComponent } from './shared/@components/single-components/object.type';
+import { ExpenseFormComponent } from './expenses/expense-form/expense-form.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -62,7 +63,8 @@ const routerConfig: ExtraOptions = {
         MultiSchemaTypeComponent,
         
         IsSvgPipe,
-        UrlToFilenamePipe
+        UrlToFilenamePipe,
+        ExpenseFormComponent
     ],
     imports: [
         BrowserModule,

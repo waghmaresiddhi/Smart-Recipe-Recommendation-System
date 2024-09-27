@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "todo",
     "bulk_todo",
     "ecommerce",
+    "expenses",
 ]
 
 MIDDLEWARE = [

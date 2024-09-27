@@ -1,0 +1,35 @@
+<!-- src/app/expenses/expense-form/expense-form.component.html -->
+<h2>Add Expense</h2>
+<form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" formControlName="amount" required>
+    <div *ngIf="expenseForm.get('amount')?.invalid && (expenseForm.get('amount')?.touched || expenseForm.get('amount')?.dirty)">
+      <small class="error" *ngIf="expenseForm.get('amount')?.errors?.required">Amount is required.</small>
+      <small class="error" *ngIf="expenseForm.get('amount')?.errors?.min">Amount must be a positive number.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <input type="text" id="category" formControlName="category" required>
+    <div *ngIf="expenseForm.get('category')?.invalid && (expenseForm.get('category')?.touched || expenseForm.get('category')?.dirty)">
+      <small class="error" *ngIf="expenseForm.get('category')?.errors?.required">Category is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" formControlName="date" required>
+    <div *ngIf="expenseForm.get('date')?.invalid && (expenseForm.get('date')?.touched || expenseForm.get('date')?.dirty)">
+      <small class="error" *ngIf="expenseForm.get('date')?.errors?.required">Date is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <button type="submit" [disabled]="expenseForm.invalid">Add Expense</button>
+</form>

@@ -72,6 +72,7 @@ urlpatterns = [
     path("api/v1/todo/", include("todo.urls")),
     path("api/v1/bulk_todo/", include("bulk_todo.urls")),
     path("api/v1/ecommerce/", include("ecommerce.urls")),
+    path('api/', include('expenses.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += [
@@ -98,5 +99,5 @@ if config("TWO_FA", cast=bool):
     ]
 else:
     urlpatterns += [
-        path("django_base_template_admin_1123/", admin.site.urls),
+        path("  ", admin.site.urls),
     ]
