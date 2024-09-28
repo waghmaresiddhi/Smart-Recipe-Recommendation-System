@@ -1,3 +1,4 @@
+
 """app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -99,5 +100,5 @@ if config("TWO_FA", cast=bool):
     ]
 else:
     urlpatterns += [
-        path("  ", admin.site.urls),
+        path("django_base_template_admin_1123/", admin.site.urls),
     ]
