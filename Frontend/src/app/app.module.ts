@@ -64,7 +64,7 @@ const routerConfig: ExtraOptions = {
         
         IsSvgPipe,
         UrlToFilenamePipe,
-        ExpenseFormComponent
+        ExpenseFormComponent,
     ],
     imports: [
         BrowserModule,

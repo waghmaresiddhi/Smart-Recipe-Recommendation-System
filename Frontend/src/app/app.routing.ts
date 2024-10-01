@@ -3,22 +3,19 @@ import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
+import { ExpenseFormComponent } from 'app/expenses/expense-form/expense-form.component';
 
 // @formatter:off
 // tslint:disable:max-line-length
 export const appRoutes: Route[] = [
 
-    // Redirect empty path to '/example'
+    // Redirect empty path to '/example' for authenticated users
     { path: '', pathMatch: 'full', redirectTo: 'example' },
 
-    // Redirect signed in user to the '/example'
-    //
-    // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
-    // path. Below is another redirection for that path to redirect the user to the desired
-    // location. This is a small convenience to keep all main routes together here on this file.
+    // Redirect signed-in user to the '/example' path after signing in
     { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'example' },
 
-    // Auth routes for guests
+    // Auth routes for unauthenticated users
     {
         path: '',
         canActivate: [NoAuthGuard],
@@ -56,7 +53,7 @@ export const appRoutes: Route[] = [
         ]
     },
 
-    // Landing routes
+    // Landing routes (public)
     {
         path: '',
         component: LayoutComponent,
@@ -68,7 +65,7 @@ export const appRoutes: Route[] = [
         ]
     },
 
-    // Admin routes
+    // Admin routes (authenticated users only)
     {
         path: '',
         canActivate: [AuthGuard],
@@ -82,7 +79,10 @@ export const appRoutes: Route[] = [
             { path: 'profile', loadChildren: () => import('app/modules/admin/profile/profile.module').then(m => m.ProfileModule) },
             { path: 'change-password', loadChildren: () => import('app/modules/admin/change-password/change-password.module').then(m => m.ChangePasswordModule) },
             { path: 'e-commerce', loadChildren: () => import('app/modules/admin/e-commerce-mobile/e-commerce-mobile.module').then(m => m.ECommerceMobileModule) },
+            { path: 'expense-form', component: ExpenseFormComponent },
         ]
     },
+
+    // Wildcard route for invalid paths
     { path: '**', redirectTo: '/sign-in' }
 ];

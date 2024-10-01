@@ -1,0 +1,106 @@
+.container {
+    max-width: 800px; /* Increase the maximum width of the container */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .expense-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .form-group input, 
+  .form-group select {
+    width: 100%; /* Make all form inputs and selects take full width */
+    padding: 12px;
+    font-size: 16px; /* Increase the size of the input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-group input#description {
+    height: 100px; /* Increase height of description box */
+  }
+  
+  .submit-button {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px; /* Larger button text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Full-width submit button */
+    text-align: center;
+  }
+  
+  .submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .expense-list {
+    margin-top: 40px;
+  }
+  
+  .expense-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .expense-list table th, 
+  .expense-list table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-button, .delete-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  
