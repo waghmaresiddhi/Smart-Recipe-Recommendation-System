@@ -15,7 +15,7 @@ import { appRoutes } from 'app/app.routing';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { LabelSearchAddModule } from 'base-ui/label-search-add/label-search-add.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlySingleFilePickerComponent } from './shared/@components/formly-single-file-picker/formly-single-file-picker.component';
@@ -35,6 +35,9 @@ import { MultiSchemaTypeComponent } from './shared/@components/single-components
 import { NullTypeComponent } from './shared/@components/single-components/null.type';
 import { ObjectTypeComponent } from './shared/@components/single-components/object.type';
 import { ExpenseFormComponent } from './expenses/expense-form/expense-form.component';
+import { DashboardComponent } from './expenses/dashboard/dashboard.component';
+import { DropdownModule } from 'primeng/dropdown'; // Import DropdownModule
+import { ChartModule } from 'primeng/chart'; // Import ChartModule
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -65,6 +68,7 @@ const routerConfig: ExtraOptions = {
         IsSvgPipe,
         UrlToFilenamePipe,
         ExpenseFormComponent,
+        DashboardComponent,
     ],
     imports: [
         BrowserModule,
@@ -85,12 +89,13 @@ const routerConfig: ExtraOptions = {
 
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
-
         SocialLoginModule,
-
         LabelSearchAddModule,
         ReactiveFormsModule,
-       
+        FormsModule, // Add FormsModule here
+        DropdownModule, // Add DropdownModule here
+        ChartModule, // Add ChartModule here
+        
         FormlyModule.forRoot({
             extras: { lazyRender: true },
             types: [
@@ -132,7 +137,6 @@ const routerConfig: ExtraOptions = {
         AppComponent
     ],
     providers: [
-
         {
             provide: 'SocialAuthServiceConfig',
             useValue: {
@@ -152,7 +156,5 @@ const routerConfig: ExtraOptions = {
             } as SocialAuthServiceConfig,
         },
     ]
-
 })
-export class AppModule {
-}
+export class AppModule {}

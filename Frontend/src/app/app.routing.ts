@@ -4,6 +4,7 @@ import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { ExpenseFormComponent } from 'app/expenses/expense-form/expense-form.component';
+import { DashboardComponent } from 'app/expenses/dashboard/dashboard.component'; // Import the DashboardComponent
 
 // @formatter:off
 // tslint:disable:max-line-length
@@ -80,6 +81,9 @@ export const appRoutes: Route[] = [
             { path: 'change-password', loadChildren: () => import('app/modules/admin/change-password/change-password.module').then(m => m.ChangePasswordModule) },
             { path: 'e-commerce', loadChildren: () => import('app/modules/admin/e-commerce-mobile/e-commerce-mobile.module').then(m => m.ECommerceMobileModule) },
             { path: 'expense-form', component: ExpenseFormComponent },
+
+            // Add dashboard route here
+            { path: 'dashboard', component: DashboardComponent }, // Added route for DashboardComponent
         ]
     },
 

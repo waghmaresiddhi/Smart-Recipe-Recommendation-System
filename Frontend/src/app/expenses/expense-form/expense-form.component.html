@@ -3,6 +3,11 @@
     <h1>Manage Expenses</h1>
   </header>
 
+  <!-- Back to Dashboard Button -->
+  <div class="button-container">
+    <button (click)="goBack()" class="back-button">Back to Dashboard</button>
+  </div>
+
   <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="expense-form">
     <div class="form-group">
       <label for="amount">Amount:</label>
@@ -12,6 +17,7 @@
     <div class="form-group">
       <label for="category">Category:</label>
       <select id="category" formControlName="category" required>
+        <option value="" disabled>Select a category</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
     </div>
@@ -34,7 +40,7 @@
 
   <section class="expense-list">
     <h2>Expense List</h2>
-    <table>
+    <table *ngIf="expenses.length > 0">
       <thead>
         <tr>
           <th>Amount</th>
@@ -59,6 +65,7 @@
         </tr>
       </tbody>
     </table>
+    <p *ngIf="expenses.length === 0">No expenses added yet.</p>
   </section>
 
   <footer class="footer">

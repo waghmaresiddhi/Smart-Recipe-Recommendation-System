@@ -1,0 +1,121 @@
+/* General styles for centering the page */
+html, body {
+    height: 100%;                /* Ensure full height */
+    margin: 0;                   /* Remove default margin */
+    display: flex;               /* Use flexbox for centering */
+    justify-content: center;     /* Center horizontally */
+    align-items: flex-start;     /* Align items towards the top */
+    background-color: #f9f9f9;   /* Light background */
+}
+
+/* Main content area */
+.main-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content towards the top */
+    align-items: center;         /* Center align the items */
+    flex: 1;                     /* Take up the remaining space */
+    width: 95%;                  /* Increase width for responsiveness */
+    max-width: 1200px;           /* Max width for desktop */
+    padding: 20px;               /* Add some padding */
+    margin-top: 20px;            /* Space from the top */
+}
+
+/* Dashboard container styling */
+.dashboard-container {
+    background-color: #fff;      /* White background for the dashboard */
+    padding: 20px;               /* Inner padding */
+    border: 1px solid #ddd;      /* Light border */
+    border-radius: 5px;          /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+    text-align: center;          /* Align text to the center */
+    width: 100%;                 /* Full width */
+}
+
+/* Title styles */
+.dashboard-title {
+    font-size: 2rem;             /* Larger title */
+    margin-bottom: 20px;         /* Space below title */
+    text-align: center;          /* Center the title text */
+}
+
+/* Button container styling */
+.button-container {
+    display: flex;
+    justify-content: center;     /* Center buttons */
+    gap: 10px;                   /* Space between buttons */
+    margin-bottom: 20px;         /* Space below buttons */
+}
+
+/* General button styling */
+.btn {
+    padding: 10px 15px;          /* Padding for buttons */
+    font-size: 1rem;             /* Button font size */
+    border: 1px solid #007bff;   /* Border color */
+    border-radius: 5px;          /* Rounded corners */
+    background-color: #007bff;   /* Primary button color */
+    color: white;                /* Text color */
+    cursor: pointer;             /* Pointer cursor on hover */
+}
+
+.btn-secondary {
+    background-color: #6c757d;   /* Secondary button color */
+}
+
+.btn:hover {
+    opacity: 0.8;                /* Slightly fade on hover */
+}
+
+/* Styling for the expense list */
+.expense-list {
+    margin-top: 20px;            /* Space above expense list */
+}
+
+.expense-table {
+    width: 100%;                 /* Full width */
+    border-collapse: collapse;   /* Remove space between borders */
+    margin-top: 10px;            /* Space above table */
+}
+
+.expense-table th, .expense-table td {
+    padding: 10px;               /* Padding for cells */
+    border: 1px solid #ddd;      /* Light border */
+}
+
+.expense-table th {
+    background-color: #f2f2f2;   /* Light gray background for header */
+}
+
+/* Section title styling */
+.section-title {
+    font-size: 1.5rem;           /* Section title font size */
+    margin: 20px 0;              /* Space above and below section titles */
+}
+
+/* Styling for the chart section */
+.chart-section {
+    display: flex;
+    justify-content: center;     /* Center the chart */
+    margin: 20px 0;              /* Space above and below the chart */
+}
+
+/* Reducing the size of the pie chart */
+.chart-section p-chart {
+    width: 300px !important;     /* Set width of the chart */
+    height: 300px !important;    /* Set height of the chart */
+}
+
+/* Optional additional dashboard styling */
+.additional-dashboard-container {
+    margin-top: 40px;            /* Space between sections */
+    background-color: #fff;      /* White background for additional insights */
+    padding: 20px;               /* Inner padding */
+    border: 1px solid #ddd;      /* Light border */
+    border-radius: 5px;          /* Rounded corners */
+    width: 100%;                 /* Full width */
+}
+
+.additional-title {
+    font-size: 1.75rem;          /* Font size for additional insights title */
+    margin-bottom: 15px;         /* Space below title */
+}

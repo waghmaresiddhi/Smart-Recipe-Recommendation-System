@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ExpensesService, Expense } from '../expenses.service'; // Adjusted import path
+import { Router } from '@angular/router'; // Import Router
+import { ExpensesService, Expense } from '../expenses.service'; // Adjust the import path as needed
 
 @Component({
   selector: 'app-expense-form',
@@ -9,11 +10,9 @@ import { ExpensesService, Expense } from '../expenses.service'; // Adjusted impo
 })
 export class ExpenseFormComponent implements OnInit {
   expenseForm: FormGroup;
-  expenses: Expense[] = [];
   isEditing = false;
   editingExpenseId: number | null = null; // To track which expense is being edited
-
-  // Define categories for the dropdown
+  expenses: Expense[] = []; // The list of expenses
   categories: string[] = [
     'Groceries',
     'Utilities',
@@ -25,24 +24,36 @@ export class ExpenseFormComponent implements OnInit {
     'Clothing',
     'Other'
   ];
+  errorMessage: string | null = null; // To hold error messages for display
 
-  constructor(private fb: FormBuilder, private expensesService: ExpensesService) {
+  constructor(
+    private fb: FormBuilder,
+    private expensesService: ExpensesService,
+    private router: Router // Inject Router
+  ) {
     this.expenseForm = this.fb.group({
       amount: ['', [Validators.required]],
-      category: ['', [Validators.required]], // Category is now required
+      category: ['', [Validators.required]],
       date: ['', [Validators.required]],
       description: ['']
     });
   }
 
   ngOnInit() {
-    this.loadExpenses(); // Load existing expenses when the component initializes
+    this.loadExpenses(); // Load expenses when the component is initialized
   }
 
+  // Load expenses from the service
   loadExpenses() {
-    this.expensesService.getExpenses().subscribe(expenses => {
-      this.expenses = expenses;
-    });
+    this.expensesService.getExpenses().subscribe(
+      (data: Expense[]) => {
+        this.expenses = data; // Populate the expenses array
+      },
+      (error) => {
+        console.error('Error loading expenses:', error);
+        this.errorMessage = 'An error occurred while loading the expenses.';
+      }
+    );
   }
 
   onSubmit() {
@@ -50,22 +61,37 @@ export class ExpenseFormComponent implements OnInit {
       const expense: Expense = this.expenseForm.value;
 
       if (this.isEditing && this.editingExpenseId !== null) {
-        // Logic to update the expense
-        this.expensesService.updateExpense(this.editingExpenseId, expense).subscribe(updatedExpense => {
-          const index = this.expenses.findIndex(exp => exp.id === updatedExpense.id);
-          if (index !== -1) {
-            this.expenses[index] = updatedExpense; // Update the expense in the array
+        // Update existing expense
+        this.expensesService.updateExpense(this.editingExpenseId, expense).subscribe(
+          updatedExpense => {
+            // Update the list with the edited expense
+            const index = this.expenses.findIndex(e => e.id === this.editingExpenseId);
+            if (index !== -1) {
+              this.expenses[index] = updatedExpense; // Update the specific expense in the list
+            }
+
+            this.resetForm();
+          },
+          error => {
+            console.error('Error updating expense:', error);
+            this.errorMessage = 'An error occurred while updating the expense.';
           }
-          this.expenseForm.reset();
-          this.isEditing = false; // Reset editing state
-          this.editingExpenseId = null; // Clear the editing expense ID
-        });
+        );
       } else {
-        this.expensesService.addExpense(expense).subscribe(newExpense => {
-          this.expenses.push(newExpense);
-          this.expenseForm.reset();
-        });
+        // Add new expense
+        this.expensesService.addExpense(expense).subscribe(
+          newExpense => {
+            this.expenses.push(newExpense); // Add the new expense to the list
+            this.resetForm();
+          },
+          error => {
+            console.error('Error adding expense:', error);
+            this.errorMessage = 'An error occurred while adding the expense.';
+          }
+        );
       }
+    } else {
+      this.errorMessage = 'Please fill out the form correctly.';
     }
   }
 
@@ -73,11 +99,35 @@ export class ExpenseFormComponent implements OnInit {
     this.isEditing = true;
     this.editingExpenseId = expense.id; // Store the ID of the expense being edited
     this.expenseForm.patchValue(expense); // Pre-fill the form with the expense details
+    this.errorMessage = null; // Clear any previous error
   }
 
   deleteExpense(id: number) {
-    this.expensesService.deleteExpense(id).subscribe(() => {
-      this.expenses = this.expenses.filter(exp => exp.id !== id);
+    this.expensesService.deleteExpense(id).subscribe(
+      () => {
+        this.expenses = this.expenses.filter(expense => expense.id !== id); // Remove the deleted expense from the list
+        this.errorMessage = null; // Clear any previous error
+      },
+      error => {
+        console.error('Error deleting expense:', error);
+        this.errorMessage = 'An error occurred while deleting the expense.';
+      }
+    );
+  }
+
+  resetForm() {
+    this.expenseForm.reset({
+      amount: '',
+      category: '',
+      date: '',
+      description: ''
     });
+    this.isEditing = false;
+    this.editingExpenseId = null;
+    this.errorMessage = null; // Clear any previous error
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']); // Adjust the route as necessary
   }
 }
