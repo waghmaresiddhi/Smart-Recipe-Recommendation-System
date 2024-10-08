@@ -36,8 +36,14 @@ import { NullTypeComponent } from './shared/@components/single-components/null.t
 import { ObjectTypeComponent } from './shared/@components/single-components/object.type';
 import { ExpenseFormComponent } from './expenses/expense-form/expense-form.component';
 import { DashboardComponent } from './expenses/dashboard/dashboard.component';
-import { DropdownModule } from 'primeng/dropdown'; // Import DropdownModule
-import { ChartModule } from 'primeng/chart'; // Import ChartModule
+
+// Import PrimeNG modules
+import { PanelModule } from 'primeng/panel'; // Keep PrimeNG modules
+import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
+import { DropdownModule } from 'primeng/dropdown';
+import { CardModule } from 'primeng/card'; // Importing CardModule
+import { TableModule } from 'primeng/table'; // Importing TableModule
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -69,6 +75,7 @@ const routerConfig: ExtraOptions = {
         UrlToFilenamePipe,
         ExpenseFormComponent,
         DashboardComponent,
+        
     ],
     imports: [
         BrowserModule,
@@ -92,10 +99,7 @@ const routerConfig: ExtraOptions = {
         SocialLoginModule,
         LabelSearchAddModule,
         ReactiveFormsModule,
-        FormsModule, // Add FormsModule here
-        DropdownModule, // Add DropdownModule here
-        ChartModule, // Add ChartModule here
-        
+        FormsModule,
         FormlyModule.forRoot({
             extras: { lazyRender: true },
             types: [
@@ -131,7 +135,15 @@ const routerConfig: ExtraOptions = {
             ]
         }),
         FormlyMaterialModule,
-        MatIconModule
+        MatIconModule,
+        
+        // PrimeNG modules added
+        PanelModule,
+        ButtonModule,
+        ChartModule,
+        DropdownModule,
+        CardModule, // Adding CardModule to imports
+        TableModule, // Adding TableModule to imports
     ],
     bootstrap: [
         AppComponent

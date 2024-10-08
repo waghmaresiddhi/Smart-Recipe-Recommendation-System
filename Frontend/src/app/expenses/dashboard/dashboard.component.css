@@ -1,121 +1,270 @@
-/* General styles for centering the page */
-html, body {
-    height: 100%;                /* Ensure full height */
-    margin: 0;                   /* Remove default margin */
-    display: flex;               /* Use flexbox for centering */
-    justify-content: center;     /* Center horizontally */
-    align-items: flex-start;     /* Align items towards the top */
-    background-color: #f9f9f9;   /* Light background */
-}
-
-/* Main content area */
-.main-dashboard-container {
+/* Hamburger Menu Styles */
+.hamburger {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align content towards the top */
-    align-items: center;         /* Center align the items */
-    flex: 1;                     /* Take up the remaining space */
-    width: 95%;                  /* Increase width for responsiveness */
-    max-width: 1200px;           /* Max width for desktop */
-    padding: 20px;               /* Add some padding */
-    margin-top: 20px;            /* Space from the top */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin: 20px; /* Add some margin for spacing */
 }
 
-/* Dashboard container styling */
-.dashboard-container {
-    background-color: #fff;      /* White background for the dashboard */
-    padding: 20px;               /* Inner padding */
-    border: 1px solid #ddd;      /* Light border */
-    border-radius: 5px;          /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
-    text-align: center;          /* Align text to the center */
-    width: 100%;                 /* Full width */
+.line {
+    height: 2px; /* Height of each line */
+    width: 20px; /* Width of each line */
+    background-color: #333333; /* Color of the lines */
+    margin: 2px 0; /* Space between lines */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effects */
 }
 
-/* Title styles */
-.dashboard-title {
-    font-size: 2rem;             /* Larger title */
-    margin-bottom: 20px;         /* Space below title */
-    text-align: center;          /* Center the title text */
+/* Add hover effect */
+.hamburger:hover .line {
+    background-color: #555555; /* Change color on hover */
 }
 
-/* Button container styling */
-.button-container {
+/* Global Body Styles */
+body {
+    font-family: system-ui,
+        -apple-system,
+        'Segoe UI',
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji';
+    font-size: 16px; /* Increase base font size for better readability */
+    line-height: 1.6; /* Improve line spacing for better readability */
+    color: #333; /* Darker text color for better contrast */
+    background-color: #f4f7fa; /* Light background for the whole page */
+}
+
+/* Main dashboard container styles */
+.main-dashboard-container {
     display: flex;
-    justify-content: center;     /* Center buttons */
-    gap: 10px;                   /* Space between buttons */
-    margin-bottom: 20px;         /* Space below buttons */
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh; /* Full height of the viewport */
 }
 
-/* General button styling */
-.btn {
-    padding: 10px 15px;          /* Padding for buttons */
-    font-size: 1rem;             /* Button font size */
-    border: 1px solid #007bff;   /* Border color */
-    border-radius: 5px;          /* Rounded corners */
-    background-color: #007bff;   /* Primary button color */
-    color: white;                /* Text color */
-    cursor: pointer;             /* Pointer cursor on hover */
+/* Dashboard container styles */
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px; /* Limit the maximum width of the dashboard */
+    background-color: #fff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* To prevent content overflow */
 }
 
-.btn-secondary {
-    background-color: #6c757d;   /* Secondary button color */
+/* Dashboard title */
+.dashboard-title {
+    text-align: center;
+    font-size: 2.5rem; /* Increase the title font size */
+    margin: 20px 0;
+    color: #003366; /* Dark blue color for the title */
+    font-weight: 600; /* Slightly bold font for the title */
 }
 
-.btn:hover {
-    opacity: 0.8;                /* Slightly fade on hover */
+/* Dashboard body layout */
+.dashboard-body {
+    display: flex; /* Flex layout for side panel and content */
 }
 
-/* Styling for the expense list */
+/* Sidebar Toggle Button Styles */
+.sidebar-toggle {
+    margin-right: 20px; /* Space between toggle button and sidebar */
+}
+
+/* Vertical button panel styles */
+.vertical-button-panel {
+    width: 250px; /* Fixed width for button panel */
+    padding: 40px; /* Padding for internal spacing */
+    background-color: #f9f9f9; /* Slightly different background for contrast */
+    border-right: 1px solid #e0e0e0; /* Light border for separation */
+    transition: transform 0.3s ease; /* Smooth transition for hiding */
+}
+
+/* Hide class for sidebar */
+.hidden {
+    transform: translateX(-100%); /* Slide out of view */
+}
+
+/* Button panel card styles */
+.button-panel {
+    margin-bottom: 20px; /* Space between button panels */
+}
+
+/* Button styles */
+.button-container {
+    display: flex; /* Use flexbox for vertical stacking */
+    flex-direction: column; /* Stack buttons vertically */
+}
+
+.p-button {
+    margin: 10px 0; /* Vertical spacing between buttons */
+    font-size: 1rem; /* Font size for buttons */
+    border-radius: 4px; /* Slightly rounded corners */
+    width: 100%; /* Full width buttons */
+    padding: 12px; /* Added padding for button height */
+    font-family: inherit; /* Inherit font family from body */
+}
+
+/* Content section styles */
+.content-section {
+    flex: 1; /* Take the remaining space */
+    padding: 20px; /* Padding for internal spacing */
+    margin-left: 20px; /* Increased spacing between sidebar and content */
+}
+
+/* Expanded class for content when sidebar is hidden */
+.expanded {
+    margin-left: 0; /* Remove margin when sidebar is hidden */
+}
+
+/* Section title styles */
+.section-title {
+    font-size: 2rem; /* Increase section title font size */
+    margin-bottom: 15px;
+    color: #003366; /* Dark blue color for section titles */
+    font-weight: 500; /* Medium weight for section titles */
+}
+
+/* Expense list styles */
 .expense-list {
-    margin-top: 20px;            /* Space above expense list */
+    margin-bottom: 30px; /* Space below the expense list */
 }
 
+/* Expense table styles */
 .expense-table {
-    width: 100%;                 /* Full width */
-    border-collapse: collapse;   /* Remove space between borders */
-    margin-top: 10px;            /* Space above table */
+    width: 500%; /* Full width table */
+    border-collapse: collapse; /* Remove space between table cells */
 }
 
-.expense-table th, .expense-table td {
-    padding: 10px;               /* Padding for cells */
-    border: 1px solid #ddd;      /* Light border */
+.expense-table th,
+.expense-table td {
+    padding: 12px; /* Padding inside table cells */
+    text-align: left; /* Left-align text */
+    border-bottom: 1px solid #e0e0e0; /* Light bottom border for rows */
 }
 
 .expense-table th {
-    background-color: #f2f2f2;   /* Light gray background for header */
+    background-color: #003366; /* Dark blue background for headers */
+    color: white; /* White text color for better contrast */
+    font-family: inherit; /* Inherit font family from body */
+    font-weight: bold; /* Bold font for headers */
 }
 
-/* Section title styling */
-.section-title {
-    font-size: 1.5rem;           /* Section title font size */
-    margin: 20px 0;              /* Space above and below section titles */
-}
-
-/* Styling for the chart section */
+/* Chart section styles */
 .chart-section {
-    display: flex;
-    justify-content: center;     /* Center the chart */
-    margin: 20px 0;              /* Space above and below the chart */
+    margin-top: 30px; /* Space above the chart section */
 }
 
-/* Reducing the size of the pie chart */
-.chart-section p-chart {
-    width: 300px !important;     /* Set width of the chart */
-    height: 300px !important;    /* Set height of the chart */
+/* Expense Filter Styles */
+.expense-filter {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between inputs */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 20px; /* Space below the filter section */
+    padding: 15px; /* Internal padding for the filter section */
+    background-color: #ffffff; /* White background for filter section */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Optional additional dashboard styling */
-.additional-dashboard-container {
-    margin-top: 40px;            /* Space between sections */
-    background-color: #fff;      /* White background for additional insights */
-    padding: 20px;               /* Inner padding */
-    border: 1px solid #ddd;      /* Light border */
-    border-radius: 5px;          /* Rounded corners */
-    width: 100%;                 /* Full width */
+/* Search Bar Styles */
+#search-bar {
+    flex: 1; /* Take up available space */
+    padding: 10px; /* Internal padding for the search bar */
+    margin-right: 10px; /* Space between search bar and category filter */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 1rem; /* Font size */
 }
 
-.additional-title {
-    font-size: 1.75rem;          /* Font size for additional insights title */
-    margin-bottom: 15px;         /* Space below title */
+/* Category Filter Styles */
+#category-filter {
+    padding: 10px; /* Internal padding for the dropdown */
+    margin-right: 10px; /* Space between dropdown and date inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 1rem; /* Font size */
+}
+
+/* Date Input Styles */
+input[type="date"] {
+    padding: 10px; /* Internal padding for date inputs */
+    margin-right: 10px; /* Space between date inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Slightly rounded corners */
+}
+
+/* Filter Button Styles */
+#filter-button {
+    padding: 10px 20px; /* Padding for button */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #003366; /* Dark blue background */
+    color: white; /* White text */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Filter Button Hover Effect */
+#filter-button:hover {
+    background-color: #005f8c; /* Lighter blue on hover */
+}
+
+/* Expense Table Styles */
+#expense-list {
+    width: 100%; /* Full width table */
+    border-collapse: collapse; /* Remove space between table cells */
+}
+
+/* Table Header Styles */
+#expense-list th {
+    padding: 12px; /* Padding inside header cells */
+    text-align: left; /* Left-align text */
+    border-bottom: 1px solid #e0e0e0; /* Light bottom border for headers */
+    background-color: #003366; /* Dark blue background for headers */
+    color: white; /* White text color for better contrast */
+}
+
+/* Table Row Styles */
+#expense-list td {
+    padding: 12px; /* Padding inside body cells */
+    text-align: left; /* Left-align text */
+    border-bottom: 1px solid #e0e0e0; /* Light bottom border for rows */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dashboard-body {
+        flex-direction: column; /* Stack vertically on smaller screens */
+    }
+
+    .vertical-button-panel {
+        width: 100%; /* Full width on mobile */
+        border-right: none; /* Remove right border */
+        border-bottom: 1px solid #e0e0e0; /* Add bottom border */
+    }
+
+    .dashboard-title {
+        font-size: 2rem; /* Responsive title size for smaller screens */
+    }
+
+    .section-title {
+        font-size: 1.5rem; /* Responsive section title size for smaller screens */
+    }
+
+    /* Responsive Design for Filter Section */
+    .expense-filter {
+        flex-direction: column; /* Stack inputs vertically on smaller screens */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    #search-bar,
+    #category-filter,
+    input[type="date"] {
+        margin: 5px 0; /* Space between inputs */
+        width: 100%; /* Full width inputs */
+    }
 }

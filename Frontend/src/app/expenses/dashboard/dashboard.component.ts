@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ExpensesService, Expense } from '../expenses.service'; // Adjusted import path
+import { ExpensesService, Expense } from '../expenses.service'; // Adjust the import path accordingly
 
 @Component({
   selector: 'app-dashboard',
@@ -11,11 +11,12 @@ import { ExpensesService, Expense } from '../expenses.service'; // Adjusted impo
 export class DashboardComponent implements OnInit {
   expenseFormVisible = false; // Toggle for displaying the form
   expenseForm: FormGroup; // Form for adding expenses
-  searchQuery: string = '';
-  selectedFilter: string = '';
+  searchQuery: string = ''; // Search query for filtering expenses by description
+  selectedFilter: string = ''; // Keep this for future use if needed
   filterOptions: { label: string, value: string }[] = [
     { label: 'All', value: '' },
     { label: 'Groceries', value: 'Groceries' },
+    { label: 'Food', value: 'Food' },
     { label: 'Utilities', value: 'Utilities' },
     { label: 'Transportation', value: 'Transportation' },
     { label: 'Entertainment', value: 'Entertainment' },
@@ -25,18 +26,24 @@ export class DashboardComponent implements OnInit {
     { label: 'Clothing', value: 'Clothing' },
     { label: 'Other', value: 'Other' }
   ];
-  expenses: Expense[] = [];
+  expenses: Expense[] = []; // Store expenses
   chartData: any; // Define chart data structure
   chartVisible: boolean = false; // Variable to control the visibility of the chart
-  expenseListVisible: boolean = false; // Property to control expense list visibility
+  sidebarHidden: boolean = false; // Initialize sidebar visibility
 
-  constructor(private expensesService: ExpensesService, private fb: FormBuilder, private router: Router) {
+  constructor(
+    private expensesService: ExpensesService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     // Initialize the form group with validators
     this.expenseForm = this.fb.group({
       amount: [null, [Validators.required, Validators.min(0)]],
       category: [null, Validators.required],
       date: [null, Validators.required],
-      description: ['']
+      description: [''],
+      searchQuery: [''], // FormControl for search query
+      selectedFilter: [''] // FormControl for selected filter
     });
   }
 
@@ -55,14 +62,12 @@ export class DashboardComponent implements OnInit {
     this.expenseFormVisible = !this.expenseFormVisible; // Toggle visibility
   }
 
-  // Method to toggle the visibility of the expense list
-  toggleExpenseListVisibility() {
-    this.expenseListVisible = !this.expenseListVisible; // Toggle visibility
+  toggleChartVisibility() {
+    this.chartVisible = !this.chartVisible; // Toggle chart visibility
   }
 
-  // Method to toggle the visibility of the chart
-  toggleChartVisibility() {
-    this.chartVisible = !this.chartVisible;
+  toggleSidebar() {
+    this.sidebarHidden = !this.sidebarHidden; // Toggle sidebar visibility
   }
 
   addExpense() {
@@ -75,19 +80,21 @@ export class DashboardComponent implements OnInit {
         this.toggleExpenseForm(); // Hide the form after adding the expense
       });
     } else {
-      // Handle form validation errors if needed
-      alert('Please fill in all required fields.');
+      alert('Please fill in all required fields.'); // Handle form validation errors if needed
     }
   }
 
+  // Method to filter expenses based on the search query
   filterExpenses() {
-    const filteredExpenses = this.expenses.filter(expense => {
-      const matchesSearch = expense.description?.toLowerCase().includes(this.searchQuery.toLowerCase());
-      const matchesFilter = this.selectedFilter ? expense.category === this.selectedFilter : true;
-      return matchesSearch && matchesFilter;
-    });
+    const searchQuery = this.expenseForm.get('searchQuery')?.value.toLowerCase();
+    const selectedFilter = this.expenseForm.get('selectedFilter')?.value;
 
-    this.prepareChartData(filteredExpenses); // Update chart data based on filtered expenses
+    return this.expenses.filter(expense => {
+      return (
+        expense.description.toLowerCase().includes(searchQuery) &&
+        (selectedFilter ? expense.category === selectedFilter : true)
+      );
+    });
   }
 
   prepareChartData(expenses: Expense[] = this.expenses) {

@@ -13,8 +13,7 @@ export class NavigationService {
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {
-    }
+    constructor(private _httpClient: HttpClient) {}
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -35,11 +34,6 @@ export class NavigationService {
      * Get all navigation data
      */
     get(): Observable<Navigation> {
-        // return this._httpClient.get<Navigation>('api/common/navigation').pipe(
-        //     tap((navigation) => {
-        //         this._navigation.next();
-        //     })
-        // );
         const singleNav = [
             {
                 id: 'example',
@@ -62,14 +56,23 @@ export class NavigationService {
                 icon: 'heroicons_outline:chart-pie',
                 link: '/e-commerce/jsonschema'
             },
-            
+            // New Navigation Item for Expense Tracker
+            {
+                id: 'expense-tracker',
+                title: 'Expense Tracker',
+                type: 'basic',
+                icon: 'heroicons_outline:credit-card',
+                link:'/dashboard' 
+            },
         ];
+
         const nav = {
             compact: singleNav,
             default: singleNav,
             futuristic: singleNav,
             horizontal: singleNav,
         } as Navigation;
+
         this._navigation.next(nav);
         return of(nav);
     }
