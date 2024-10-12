@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   filterOptions: { label: string, value: string }[] = [
     { label: 'All', value: '' },
     { label: 'Groceries', value: 'Groceries' },
-    { label: 'Food', value: 'Food' },
+    { label: 'Food', value: 'Groceries' },
     { label: 'Utilities', value: 'Utilities' },
     { label: 'Transportation', value: 'Transportation' },
     { label: 'Entertainment', value: 'Entertainment' },

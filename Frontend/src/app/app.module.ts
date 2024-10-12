@@ -43,7 +43,12 @@ import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card'; // Importing CardModule
-import { TableModule } from 'primeng/table'; // Importing TableModule
+import { TableModule } from 'primeng/table';
+import { EditExpensesComponent } from './expenses/edit-expenses/edit-expenses.component';
+import { ViewReportsComponent } from './expenses/view-reports/view-reports.component';
+import { ShowChartComponent } from './expenses/show-chart/show-chart.component';
+import { HelpCenterComponent } from './expenses/help-center/help-center.component';
+import { SettingsComponent } from './expenses/settings/settings.component'; // Importing TableModule
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -75,6 +80,11 @@ const routerConfig: ExtraOptions = {
         UrlToFilenamePipe,
         ExpenseFormComponent,
         DashboardComponent,
+        EditExpensesComponent,
+        ViewReportsComponent,
+        ShowChartComponent,
+        HelpCenterComponent,
+        SettingsComponent,
         
     ],
     imports: [

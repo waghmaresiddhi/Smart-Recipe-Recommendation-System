@@ -31,17 +31,17 @@
                         </p-button>
 
                         <p-button 
-                        label="Edit Expenses" 
-                        icon="pi pi-cog" 
-                        class="p-button-secondary mb-2" 
-                        (click)="navigateTo('edit')">
-                    </p-button>
+                            label="Edit Expenses" 
+                            icon="pi pi-cog" 
+                            class="p-button-secondary mb-2" 
+                            (click)="navigateTo('edit-expenses')">
+                        </p-button>
 
                         <p-button 
                             label="View Reports" 
                             icon="pi pi-file" 
                             class="p-button-info mb-2" 
-                            (click)="navigateTo('reports')">
+                            (click)="navigateTo('view-reports')">
                         </p-button>
 
                         <p-button 
@@ -55,7 +55,7 @@
                             label="Help Center" 
                             icon="pi pi-question-circle" 
                             class="p-button-warning mb-2" 
-                            (click)="navigateTo('help')">
+                            (click)="navigateTo('help-center')">
                         </p-button>
 
                         <p-button 
@@ -64,9 +64,17 @@
                             class="p-button-secondary mb-2" 
                             (click)="navigateTo('settings')">
                         </p-button>
-                       
                     </div>
                 </p-card>
+                
+                <!-- Navigation Links -->
+                <div class="navigation-links">
+                    <a routerLink="/edit-expenses" class="nav-link">Edit Expenses</a>
+                    <a routerLink="/view-reports" class="nav-link">View Reports</a>
+                    <a routerLink="/show-chart" class="nav-link">Show Chart</a>
+                    <a routerLink="/help-center" class="nav-link">Help Center</a>
+                    <a routerLink="/settings" class="nav-link">Settings</a>
+                </div>
             </div>
 
             <!-- Main Content Area -->
@@ -111,4 +119,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
