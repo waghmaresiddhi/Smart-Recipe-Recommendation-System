@@ -11,7 +11,7 @@
 
   <!-- Expense Form Section -->
   <section class="expense-form-section">
-    <h2>{{ isEditing ? 'Edit Expense' : 'Add Expense' }}</h2>
+   
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="expense-form">
       <div class="form-group">
         <label for="amount">Amount:</label>

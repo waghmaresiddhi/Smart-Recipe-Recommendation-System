@@ -1,36 +1,53 @@
-.container {
-  max-width: 800px; /* Increase the maximum width of the container */
-  margin: 0 auto; /* Center the form horizontally */
-  padding: 20px;
+/* Resetting default margins and paddings for the entire page */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures the body takes the full height of the viewport */
 }
 
+/* Global Container Styling */
+.container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100%; /* Full height */
+  max-width: 100%; /* Full width */
+  margin: 0 auto;
+  padding: 20px; /* Padding around the content */
+  box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+/* Header Styling */
 .header {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Edit Expense Container Layout */
 .edit-expense-container {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space between the list and the form */
-  padding: 20px; /* Add padding around the container */
-  background-color: #f9f9f9; /* Light background for better visibility */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: flex; /* Horizontal layout for form and list */
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for visibility */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Full-width usage */
 }
 
+/* Expense Form Styling */
 .expense-form {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* Keeping form background light for contrast */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
-  flex: 0 0 300px; /* Fixed width for the form */
+  flex: 0 0 350px; /* Adjusted width for form */
 }
 
+/* Expense List Styling */
 .expense-list {
-  flex: 1; /* Allow the list to grow */
-  margin-right: 20px; /* Space between list and form */
-  margin-top: 40px; /* Space above the expense list */
+  flex: 1; /* Allow the list to take remaining space */
+  margin-right: 20px;
+  margin-top: 40px;
 }
 
 .expense-list table {
@@ -38,21 +55,23 @@
   border-collapse: collapse;
 }
 
-.expense-list table th, 
+.expense-list table th,
 .expense-list table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
+/* Typography and Header Spacing */
 h2 {
-  margin-bottom: 20px; /* Space below the main heading */
+  margin-bottom: 20px;
 }
 
 h3 {
-  margin-bottom: 15px; /* Space below the subsection heading */
+  margin-bottom: 15px;
 }
 
+/* Form Group Styling */
 .form-group {
   margin-bottom: 15px;
 }
@@ -63,29 +82,30 @@ h3 {
   font-weight: bold;
 }
 
-.form-group input, 
+.form-group input,
 .form-group select {
-  width: 100%; /* Make all form inputs and selects take full width */
+  width: 100%;
   padding: 12px;
-  font-size: 16px; /* Increase the size of the input fields */
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .form-group input#description {
-  height: 100px; /* Increase height of description box */
+  height: 100px;
 }
 
+/* Submit Button Styling */
 .submit-button {
   background-color: #28a745;
   color: white;
   padding: 15px 20px;
-  font-size: 18px; /* Larger button text */
+  font-size: 18px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%; /* Full-width submit button */
+  width: 100%;
   text-align: center;
 }
 
@@ -93,12 +113,15 @@ h3 {
   background-color: #218838;
 }
 
+/* Button Group Styling */
 .button-group {
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 10px;
 }
 
-.edit-button, .delete-button {
+/* Edit and Delete Button Styling */
+.edit-button,
+.delete-button {
   padding: 8px 12px;
   font-size: 14px;
   border: none;
@@ -124,15 +147,17 @@ h3 {
   background-color: #c82333;
 }
 
+/* Error Feedback Styling */
 .invalid-feedback {
-  font-size: 0.875em; /* Smaller font size for feedback */
-  color: red; /* Red color for error messages */
+  font-size: 0.875em;
+  color: red;
 }
 
+/* Table Striping and Hover Effects */
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f2f2f2; /* Light background for odd rows */
+  background-color: #f2f2f2;
 }
 
 .table-hover tbody tr:hover {
-  background-color: #e0e0e0; /* Highlight row on hover */
+  background-color: #e0e0e0;
 }

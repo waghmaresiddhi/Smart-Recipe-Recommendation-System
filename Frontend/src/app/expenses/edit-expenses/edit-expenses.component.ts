@@ -44,6 +44,9 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
       date: ['', Validators.required],
       description: ['']
     });
+
+    // Optional: Load expenses initially if necessary
+    // this.loadExpenses();
   }
 
   editExpense(expense: Expense): void {
@@ -78,13 +81,10 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Method to delete an expense
-  deleteExpense(expenseId: number) {
-    // Implement the logic to delete the expense
+  deleteExpense(expenseId: number): void {
     if (confirm('Are you sure you want to delete this expense?')) {
       this.expensesService.deleteExpense(expenseId).subscribe(() => {
-        // Refresh the expense list after deletion
-        this.loadExpenses();
+        this.loadExpenses(); // Refresh the expense list after deletion
       }, error => {
         console.error('Error deleting expense:', error);
       });
@@ -95,12 +95,11 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
     this.isEditing = false; // Disable editing
     this.selectedExpense = null; // Clear the selected expense
     this.editExpenseForm.reset(); // Reset the form
-    this.router.navigate(['/expense-list']); // Navigate back to the expense list
+    // Optionally, you can keep the user on the same page if you don't want to navigate away
+    // this.router.navigate(['/expense-list']); // Uncomment if you want to navigate back to the expense list
   }
 
-  // Method to load expenses (refreshes the list)
   loadExpenses(): void {
-    // Call your service to refresh the expense list
     this.expensesService.getExpenses().subscribe();
   }
 

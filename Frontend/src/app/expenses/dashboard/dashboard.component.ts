@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   filterOptions: { label: string, value: string }[] = [
     { label: 'All', value: '' },
     { label: 'Groceries', value: 'Groceries' },
-    { label: 'Food', value: 'Groceries' },
+    { label: 'Food', value: 'Food' },
     { label: 'Utilities', value: 'Utilities' },
     { label: 'Transportation', value: 'Transportation' },
     { label: 'Entertainment', value: 'Entertainment' },
@@ -30,6 +30,11 @@ export class DashboardComponent implements OnInit {
   chartData: any; // Define chart data structure
   chartVisible: boolean = false; // Variable to control the visibility of the chart
   sidebarHidden: boolean = false; // Initialize sidebar visibility
+
+  dailyExpensesData: any; // Define daily expenses data structure
+  monthlyExpensesData: any; // Define monthly expenses data structure
+  dailyExpensesOptions: any; // Define options for daily expenses chart
+  monthlyExpensesOptions: any; // Define options for monthly expenses chart
 
   constructor(
     private expensesService: ExpensesService,
@@ -55,7 +60,81 @@ export class DashboardComponent implements OnInit {
     this.expensesService.getExpenses().subscribe(expenses => {
       this.expenses = expenses;
       this.prepareChartData(); // Prepare chart data after loading expenses
+      this.prepareDailyMonthlyData(); // Prepare daily and monthly data
     });
+  }
+
+  prepareDailyMonthlyData() {
+    // Logic to prepare data for daily and monthly graphs
+    const dailyData = this.getDailyData(this.expenses);
+    const monthlyData = this.getMonthlyData(this.expenses);
+
+    this.dailyExpensesData = {
+      labels: dailyData.labels,
+      datasets: [{
+        label: 'Daily Expenses',
+        data: dailyData.values,
+        backgroundColor: '#42A5F5'
+      }]
+    };
+
+    this.monthlyExpensesData = {
+      labels: monthlyData.labels,
+      datasets: [{
+        label: 'Monthly Expenses',
+        data: monthlyData.values,
+        backgroundColor: '#66BB6A'
+      }]
+    };
+
+    // Set options for the charts
+    this.dailyExpensesOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    };
+
+    this.monthlyExpensesOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    };
+  }
+
+  getDailyData(expenses: Expense[]) {
+    // Logic to format data for daily expenses
+    const dailyMap: { [key: string]: number } = {};
+    expenses.forEach(expense => {
+      const date = new Date(expense.date).toDateString(); // Format date to string
+      dailyMap[date] = (dailyMap[date] || 0) + expense.amount;
+    });
+
+    return {
+      labels: Object.keys(dailyMap),
+      values: Object.values(dailyMap)
+    };
+  }
+
+  getMonthlyData(expenses: Expense[]) {
+    // Logic to format data for monthly expenses
+    const monthlyMap: { [key: string]: number } = {};
+    expenses.forEach(expense => {
+      const month = new Date(expense.date).toLocaleString('default', { month: 'long', year: 'numeric' }); // Get month and year
+      monthlyMap[month] = (monthlyMap[month] || 0) + expense.amount;
+    });
+
+    return {
+      labels: Object.keys(monthlyMap),
+      values: Object.values(monthlyMap)
+    };
   }
 
   toggleExpenseForm() {
@@ -141,5 +220,13 @@ export class DashboardComponent implements OnInit {
 
   navigateTo(path: string): void {
     this.router.navigate([path]); // Use Router to navigate to the specified path
+  }
+
+  // Method to clear filters
+  clearFilters() {
+    this.expenseForm.get('searchQuery')?.setValue(''); // Clear search query
+    this.expenseForm.get('selectedFilter')?.setValue(''); // Clear selected filter
+    // Optionally, you could reload the expenses to refresh the view:
+    this.loadExpenses(); // Reload expenses if needed
   }
 }

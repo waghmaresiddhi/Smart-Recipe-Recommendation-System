@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { Navigation } from 'app/core/navigation/navigation.types';
 
 @Injectable({
@@ -36,33 +35,47 @@ export class NavigationService {
     get(): Observable<Navigation> {
         const singleNav = [
             {
-                id: 'example',
-                title: 'Example',
+                id: 'profile',
+                title: 'My Profile',
                 type: 'basic',
-                icon: 'heroicons_outline:chart-pie',
-                link: '/example'
+                icon: 'pi pi-user',
+                link: '/profile'
+            },
+           
+            {
+                id: 'edit-expenses',
+                title: 'Edit Expenses',
+                type: 'basic',
+                icon: 'pi pi-cog',
+                link: '/edit-expenses'
             },
             {
-                id: 'e-commerce',
-                title: 'E-Commerce',
+                id: 'view-reports',
+                title: 'View Reports',
                 type: 'basic',
-                icon: 'heroicons_outline:chart-pie',
-                link: '/e-commerce/'
+                icon: 'pi pi-file',
+                link: '/view-reports'
             },
             {
-                id: 'json',
-                title: 'Json Schema',
+                id: 'show-chart',
+                title: 'Show Chart',
                 type: 'basic',
-                icon: 'heroicons_outline:chart-pie',
-                link: '/e-commerce/jsonschema'
+                icon: 'pi pi-chart-pie',
+                link: '/show-chart'
             },
-            // New Navigation Item for Expense Tracker
             {
-                id: 'expense-tracker',
-                title: 'Expense Tracker',
+                id: 'help-center',
+                title: 'Help Center',
                 type: 'basic',
-                icon: 'heroicons_outline:credit-card',
-                link:'/dashboard' 
+                icon: 'pi pi-question-circle',
+                link: '/help-center'
+            },
+            {
+                id: 'settings',
+                title: 'Settings',
+                type: 'basic',
+                icon: 'pi pi-cog',
+                link: '/settings'
             },
         ];
 

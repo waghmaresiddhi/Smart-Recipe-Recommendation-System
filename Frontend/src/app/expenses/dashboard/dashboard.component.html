@@ -1,122 +1,79 @@
+<!-- Main Container -->
 <div class="main-dashboard-container">
-    <div class="dashboard-container">
+    <!-- Header -->
+    <div class="header">
         <h1 class="dashboard-title">Manage Expenses</h1>
-
-        <div class="dashboard-body">
-            <!-- Hamburger icon to toggle the sidebar -->
-            <div class="sidebar-toggle" (click)="toggleSidebar()">
-                <div class="hamburger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
-
-            <!-- Vertical Button Panel -->
-            <div class="vertical-button-panel" [ngClass]="{'hidden': sidebarHidden}">
-                <p-card header="Quick Actions" class="button-panel">
-                    <div class="button-container">
-                        <p-button 
-                            label="My Profile" 
-                            icon="pi pi-user" 
-                            class="p-button-help mb-2" 
-                            (click)="navigateTo('profile')">
-                        </p-button>
-
-                        <p-button 
-                            label="Add Expense" 
-                            icon="pi pi-plus-circle" 
-                            class="p-button-primary mb-2" 
-                            (click)="navigateTo('expense-form')">
-                        </p-button>
-
-                        <p-button 
-                            label="Edit Expenses" 
-                            icon="pi pi-cog" 
-                            class="p-button-secondary mb-2" 
-                            (click)="navigateTo('edit-expenses')">
-                        </p-button>
-
-                        <p-button 
-                            label="View Reports" 
-                            icon="pi pi-file" 
-                            class="p-button-info mb-2" 
-                            (click)="navigateTo('view-reports')">
-                        </p-button>
-
-                        <p-button 
-                            label="{{ chartVisible ? 'Hide Chart' : 'Show Chart' }}" 
-                            icon="pi pi-chart-pie" 
-                            class="p-button-secondary mb-2" 
-                            (click)="toggleChartVisibility()">
-                        </p-button>
-
-                        <p-button 
-                            label="Help Center" 
-                            icon="pi pi-question-circle" 
-                            class="p-button-warning mb-2" 
-                            (click)="navigateTo('help-center')">
-                        </p-button>
-
-                        <p-button 
-                            label="Settings" 
-                            icon="pi pi-cog" 
-                            class="p-button-secondary mb-2" 
-                            (click)="navigateTo('settings')">
-                        </p-button>
-                    </div>
-                </p-card>
-                
-                <!-- Navigation Links -->
-                <div class="navigation-links">
-                    <a routerLink="/edit-expenses" class="nav-link">Edit Expenses</a>
-                    <a routerLink="/view-reports" class="nav-link">View Reports</a>
-                    <a routerLink="/show-chart" class="nav-link">Show Chart</a>
-                    <a routerLink="/help-center" class="nav-link">Help Center</a>
-                    <a routerLink="/settings" class="nav-link">Settings</a>
-                </div>
-            </div>
-
-            <!-- Main Content Area -->
-            <div class="content-section" [ngClass]="{'expanded': sidebarHidden}">
-                <!-- Search and Filter Section -->
-                <div class="expense-filter">
-                    <input type="text" placeholder="Search by description..."
-                           [formControl]="expenseForm.get('searchQuery')" (input)="filterExpenses()" />
-                    <select [formControl]="expenseForm.get('selectedFilter')" (change)="filterExpenses()">
-                        <option *ngFor="let option of filterOptions" [value]="option.value">{{ option.label }}</option>
-                    </select>
-                </div>
-
-                <!-- Expense List Section -->
-                <section class="expense-list">
-                    <h2 class="section-title">Expense List</h2>
-                    <p-table [value]="filterExpenses()" class="expense-table">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Amount</th>
-                                <th>Category</th>
-                                <th>Date</th>
-                                <th>Description</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-expense>
-                            <tr>
-                                <td>{{ expense.amount | currency }}</td>
-                                <td>{{ expense.category }}</td>
-                                <td>{{ expense.date | date:'dd-MM-yyyy' }}</td>
-                                <td>{{ expense.description }}</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </section>
-
-                <!-- Pie Chart Section -->
-                <section class="chart-section" *ngIf="chartVisible">
-                    <h2 class="section-title">Expenses by Category</h2>
-                    <p-chart type="pie" [data]="chartData"></p-chart>
-                </section>
-            </div>
-        </div>
     </div>
-</div> 
+
+    <!-- Quick Access Buttons -->
+    <div class="quick-access">
+        <button class="quick-button" [routerLink]="['/expense-form']">
+            <i class="fas fa-plus"></i> New Expense
+        </button>
+        <button class="quick-button" [routerLink]="['/create-report']">
+            <i class="fas fa-file-alt"></i> Create Report
+        </button>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+        <!-- Search and Filter Section -->
+        <div class="expense-filter">
+            <input type="text" placeholder="Search by description..." 
+                   [formControl]="expenseForm.get('searchQuery')" (input)="filterExpenses()" />
+            <select [formControl]="expenseForm.get('selectedFilter')" (change)="filterExpenses()">
+                <option *ngFor="let option of filterOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <button class="clear-filter" (click)="clearFilters()">Clear</button>
+        </div>
+
+        <!-- Expense List Section -->
+        <section class="expense-list">
+            <h2 class="section-title">Recent Expenses</h2>
+            <p-table [value]="filterExpenses()" class="expense-table">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                       
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-expense>
+                    <tr [ngClass]="{'highlight-row': expense.isHighlighted}">
+                        <td>{{ expense.amount | currency }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.date | date:'dd-MM-yyyy' }}</td>
+                        <td>{{ expense.description }}</td>
+                       
+                    </tr>
+                </ng-template>
+            </p-table>
+        </section>
+
+        <!-- Pie Chart Section -->
+        <section class="chart-section" *ngIf="chartVisible">
+            <h2 class="section-title">Expenses by Category</h2>
+            <p-chart type="pie" [data]="chartData" [options]="chartOptions"></p-chart>
+        </section>
+
+        <!-- Bar Graph Section -->
+        <section class="bar-graph-section">
+            <h2 class="section-title">Expenses Overview</h2>
+            <div class="bar-graphs">
+                <!-- Day-by-Day Expenses Graph -->
+                <div class="bar-graph">
+                    <h3>Daily Expenses</h3>
+                    <p-chart type="bar" [data]="dailyExpensesData" [options]="dailyExpensesOptions"></p-chart>
+                </div>
+
+                <!-- Month-by-Month Expenses Graph -->
+                <div class="bar-graph">
+                    <h3>Monthly Expenses</h3>
+                    <p-chart type="bar" [data]="monthlyExpensesData" [options]="monthlyExpensesOptions"></p-chart>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
