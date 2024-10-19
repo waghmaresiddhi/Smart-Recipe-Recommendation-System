@@ -1,97 +1,240 @@
-/* Container for the Edit Expense section */
-.edit-expense-container {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+/* Modal Overlay to cover the screen */
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Fixed the rgba value */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
+
+/* Modal Box Styling */
+.popup-box {
+    background-color: #ffffff;
+    padding: 50px; /* Increased padding */
+    border-radius: 16px; /* Slightly larger border radius */
+    width: 90%; /* Increased width */
+    max-width: 1200px; /* Increased max-width */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: popupAnimation 0.4s ease-in-out;
+}
+
+/* Smooth animation for the popup */
+@keyframes popupAnimation {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close button inside the modal */
+.btn-close-popup {
+    position: absolute;
+    top: 15px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
+    background: transparent;
+    border: none;
+    font-size: 2em; /* Increased font size */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-close-popup:hover {
+    color: #e0e0e0;
+}
+
+/* Form container within the popup */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Increased gap */
+    width: 100%;
+    margin-top: 15px; /* Increased margin */
+}
+
+/* Boxed styling for each form category */
+.form-category {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 25px; /* Increased padding */
+    margin-bottom: 15px; /* Increased margin */
     background-color: #f9f9f9;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Set a max width for better layout */
-    margin: 20px auto; /* Center horizontally with margin */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Form section headers */
+.form-category h3 {
+    font-size: 1.8em; /* Increased font size */
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Input and select styling inside the form */
+input.form-control,
+select.form-control,
+textarea.form-control {
+    width: 100%;
+    padding: 15px; /* Increased padding */
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 1.2em; /* Increased font size */
+    margin-top: 10px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+}
+
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Textarea specific styles */
+textarea {
+    height: 120px; /* Increased height */
+    resize: none;
+}
+
+/* Form labels */
+.form-label {
+    font-size: 1.4em; /* Increased font size */
+    margin-bottom: 10px;
+}
+
+/* Submit button styling inside popup */
+.btn-submit {
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1.2em; /* Increased font size */
+    padding: 15px 18px; /* Increased padding */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Main container for the Edit Expense section */
+.edit-expense-container {
+    padding: 40px; /* Increased padding */
+    border-radius: 12px;
+    background-color: #f4f6f9;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    max-width: 1200px; /* Increased max-width */
+    margin: 80px auto; /* Increased margin */
+    font-family: 'Arial', sans-serif;
 }
 
 /* Styling for the expense list section */
 .expense-list {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Increased margin */
 }
 
 /* Table styling */
 .table {
     width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse; /* Ensure no gaps between cells */
+    margin-bottom: 15px;
+    border-collapse: collapse;
+    font-size: 1.2em; /* Increased font size */
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 
 .table th,
 .table td {
+    padding: 15px; /* Increased padding */
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #e0e0e0;
+    text-transform: uppercase;
+}
+
+.table td {
     text-align: center;
-    vertical-align: middle;
-    padding: 10px; /* Add padding for better spacing */
-    border: 1px solid #ddd; /* Add borders for better visibility */
 }
 
 /* Button styles */
 .btn {
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 4px;
-    color: #000; /* Set text color to black */
-    background-color: #fff; /* Set background color to white */
-    border: 1px solid #ccc; /* Add a light border */
-    transition: background-color 0.2s ease; /* Smooth transition */
+    font-size: 1.2em; /* Increased font size */
+    padding: 10px 18px; /* Increased padding */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.btn:hover {
-    background-color: #f1f1f1; /* Slightly darker on hover */
+.btn-warning {
+    background-color: #f0ad4e;
+}
+
+.btn-warning:hover {
+    background-color: #fff;
+}
+
+.btn-danger {
+    background-color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #fff;
 }
 
 /* Button group for aligning buttons */
 .button-group {
     display: flex;
-    justify-content: center; /* Center buttons horizontally */
-    gap: 20px; /* Increased space between buttons */
+    justify-content: center;
+    gap: 20px; /* Increased gap */
+    margin-top: 20px; /* Increased margin */
 }
 
 /* Form group styling */
 .form-group {
     margin-bottom: 15px;
-    width: 100%; /* Ensure full width for form groups */
+    width: 100%;
 }
 
 /* Feedback for invalid inputs */
 .invalid-feedback {
-    font-size: 12px;
-    color: #dc3545; /* Red for invalid feedback */
+    font-size: 1em; /* Increased font size */
+    color: #fff;
 }
 
 /* Center the form itself */
 form {
     display: flex;
-    flex-direction: column; /* Stack inputs vertically */
-    align-items: center; /* Center inputs */
-    width: 100%; /* Make form take full width */
-}
-
-/* Input and select styling */
-input.form-control,
-select.form-control,
-textarea.form-control {
-    width: 100%; /* Ensure full width */
-    margin-top: 5px; /* Spacing above input elements */
-}
-
-/* Ensure textarea has enough height */
-textarea {
-    height: 100px; /* Fixed height for text area */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 /* General styles for headers */
 h2 {
-    text-align: center; /* Center the main title */
-    margin-bottom: 20px; /* Space below title */
+    font-size: 2.5em; /* Increased font size */
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 h3 {
-    text-align: center; /* Center the subheader */
-    margin-bottom: 10px; /* Space below subheader */
+    font-size: 2em; /* Increased font size */
+    text-align: center;
+    margin-bottom: 15px;
 }

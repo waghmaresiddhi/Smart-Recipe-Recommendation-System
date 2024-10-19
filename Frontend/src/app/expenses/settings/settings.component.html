@@ -1,1 +1,7 @@
-<p>settings works!</p>
+<h2>Theme Settings</h2>
+<label>
+  <input type="radio" name="theme" value="light" (change)="changeTheme('light')" [checked]="selectedTheme === 'light'"/> Light
+</label>
+<label>
+  <input type="radio" name="theme" value="dark" (change)="changeTheme('dark')" [checked]="selectedTheme === 'dark'"/> Dark
+</label>

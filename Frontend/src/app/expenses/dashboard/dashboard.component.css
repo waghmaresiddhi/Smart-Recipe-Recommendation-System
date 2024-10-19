@@ -1,10 +1,10 @@
 /* Main Container */
 .main-dashboard-container {
-    background-color: #222;
+    background-color: #fff; /* Changed to white */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    color: #fff;
+    color: #000; /* Adjusted text color for better contrast */
     width: 100%; /* Ensure full width utilization */
     max-width: 1200px; /* Optional: limit max width */
     margin: 0 auto; /* Center the container */
@@ -19,7 +19,7 @@
 
 .dashboard-title {
     font-size: 28px;
-    color: #fff;
+    color: #000; /* Adjusted text color */
 }
 
 /* Quick Access Buttons */
@@ -32,12 +32,12 @@
 }
 
 .quick-button {
-    background-color:  #333; /* Default button color */
-    color: #fff;
+    background-color: #f2f2f2; /* Light button color */
+    color: #000; /* Dark text for contrast */
     padding: 4px 8px; /* Smaller padding for smaller buttons */
     border-radius: 4px; /* Rounded corners */
     font-size: 12px; /* Smaller font size */
-    border: none;
+    border: 1px solid #ddd; /* Added a subtle border */
     cursor: pointer;
     flex: 0 0 auto; /* Prevent flex-grow, allow only fixed size */
     text-align: center; /* Center button text */
@@ -46,7 +46,7 @@
 
 .quick-button:hover,
 .quick-button:focus {
-    background-color: #333; /* Darker shade for hover */
+    background-color: #e0e0e0; /* Slightly darker shade for hover */
     outline: none;
 }
 
@@ -63,17 +63,17 @@
 .expense-filter select {
     padding: 8px; /* Reduced padding for filter inputs */
     border-radius: 4px;
-    border: 1px solid #555; /* Added border for better visibility */
+    border: 1px solid #ccc; /* Subtle border for inputs */
     width: 100%; /* Make inputs full width */
     max-width: 300px; /* Set max width to avoid overly large inputs */
     box-sizing: border-box;
-    background-color: #444; /* Input background for contrast */
-    color: #fff; /* Input text color */
+    background-color: #f9f9f9; /* Light input background */
+    color: #000; /* Dark text color */
 }
 
 /* Expense List Section */
 .expense-list {
-    background-color: #333;
+    background-color: #fff; /* Changed to white */
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -89,17 +89,17 @@
 .expense-table th,
 .expense-table td {
     padding: 10px;
-    border-bottom: 1px solid #444;
-    color: #fff;
+    border-bottom: 1px solid #ddd;
+    color: #000; /* Adjusted text color */
     text-align: left;
 }
 
 .expense-table th {
-    background-color: #444;
+    background-color: #f5f5f5; /* Light header background */
 }
 
 .expense-table tr:hover {
-    background-color: #555;
+    background-color: #f0f0f0; /* Light hover effect */
 }
 
 /* Buttons in Table */
@@ -107,11 +107,11 @@
 .generate-button {
     padding: 4px 8px; /* Smaller padding for smaller buttons */
     border-radius: 4px;
-    border: none;
+    border: 1px solid #ddd; /* Subtle border */
     cursor: pointer;
-    color: #fff;
+    color: #000;
     font-size: 12px; /* Smaller font size */
-    background-color:  #333;; /* Same background color for both buttons */
+    background-color: #f2f2f2; /* Light background color */
     transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
@@ -119,13 +119,13 @@
 .create-button:focus,
 .generate-button:hover,
 .generate-button:focus {
-    background-color: #333; /* Darker shade for hover */
+    background-color: #e0e0e0; /* Slightly darker shade for hover */
     outline: none;
 }
 
 /* Chart Section */
 .chart-section {
-    background-color: #333;
+    background-color: #fff; /* Changed to white */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -135,14 +135,14 @@
 .section-title {
     font-size: 22px;
     margin-bottom: 15px;
-    color: #fff;
+    color: #000; /* Adjusted text color */
 }
 
 /* Bar Graph Section */
 .bar-graph-section {
     margin-top: 20px;
     padding: 20px;
-    background-color: #333;
+    background-color: #fff; /* Changed to white */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -161,7 +161,7 @@
 }
 
 .bar-graph h3 {
-    color: #fff;
+    color: #000; /* Adjusted text color */
     margin-bottom: 10px;
 }
 

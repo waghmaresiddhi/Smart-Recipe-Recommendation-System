@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ExpensesService, Expense } from '../expenses.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-edit-expenses',
@@ -15,6 +15,7 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
   expenses$ = this.expensesService.expenses$;
   subscription!: Subscription;
   isEditing: boolean = false; // Track editing state
+  successMessage: string = ''; // Initialize successMessage
 
   // Array of categories
   categories: string[] = [
@@ -32,9 +33,8 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private expensesService: ExpensesService
+    private expensesService: ExpensesService,
+    private router: Router // Inject Router
   ) {}
 
   ngOnInit(): void {
@@ -45,8 +45,7 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
       description: ['']
     });
 
-    // Optional: Load expenses initially if necessary
-    // this.loadExpenses();
+    this.loadExpenses(); // Load expenses initially
   }
 
   editExpense(expense: Expense): void {
@@ -60,6 +59,9 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
       date: expense.date,
       description: expense.description
     });
+
+    // Open the modal
+    this.openModal();
   }
 
   onSubmitEdit(): void {
@@ -71,8 +73,8 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
 
       this.expensesService.updateExpense(this.selectedExpense.id, updatedExpense).subscribe(
         () => {
-          alert('Expense updated successfully!');
-          this.cancelEdit(); // Navigate back to the expense list after updating
+          this.successMessage = 'Expense updated successfully!'; // Set success message
+          this.cancelEdit(); // Close modal and reset after update
         },
         (error) => {
           console.error('Failed to update expense', error);
@@ -95,17 +97,40 @@ export class EditExpensesComponent implements OnInit, OnDestroy {
     this.isEditing = false; // Disable editing
     this.selectedExpense = null; // Clear the selected expense
     this.editExpenseForm.reset(); // Reset the form
-    // Optionally, you can keep the user on the same page if you don't want to navigate away
-    // this.router.navigate(['/expense-list']); // Uncomment if you want to navigate back to the expense list
+    this.closeModal(); // Close the modal
+    this.successMessage = ''; // Reset success message
   }
 
   loadExpenses(): void {
-    this.expensesService.getExpenses().subscribe();
+    // Use subscription to load expenses and manage it for cleanup
+    this.subscription = this.expensesService.getExpenses().subscribe();
+  }
+
+  // Modal control methods
+  openModal(): void {
+    const modalElement = document.getElementById('popupOverlay');
+    if (modalElement) {
+      modalElement.classList.add('show');
+      modalElement.style.display = 'flex'; // Change to flex for centering
+    }
+  }
+
+  closeModal(): void {
+    const modalElement = document.getElementById('popupOverlay');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.style.display = 'none';
+    }
   }
 
   ngOnDestroy(): void {
+    // Unsubscribe from the subscription when the component is destroyed
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']); // Replace with your dashboard route
   }
 }

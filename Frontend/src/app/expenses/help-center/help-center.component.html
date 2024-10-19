@@ -1,1 +1,102 @@
-<p>help-center works!</p>
+<div class="help-center-container">
+    <header>
+      <h1>Help Center</h1>
+      <input
+        type="text"
+        placeholder="Search to search"
+        class="search-bar"
+      />
+    </header>
+  
+    <section class="main-content">
+      <div class="category">
+        <h2>Getting Started</h2>
+        <p>Learn the basics of setting up and using the system</p>
+        <button (click)="openPopup('gettingStarted')">Get Started</button>
+      </div>
+  
+      <div class="category">
+        <h2>Account Management</h2>
+        <p>Manage your account, users, and permissions</p>
+        <button (click)="openPopup('accountManagement')">Details</button>
+      </div>
+  
+      <div class="category">
+        <h2>Expense Management</h2>
+        <p>Add, edit, and delete your expense entries</p>
+        <button (click)="openPopup('expenseManagement')">Manage Expenses</button>
+      </div>
+  
+      <div class="category">
+        <h2>Reporting</h2>
+        <p>Generate and export detailed reports and graphs</p>
+        <button (click)="openPopup('reporting')">Learn More</button>
+      </div>
+    </section>
+  
+    <footer>
+      <button class="contact-us" (click)="openPopup('contact')">Contact Us</button>
+    </footer>
+  
+    <!-- Pop-up Overlay (Reusing the structure you want) -->
+    <div id="popupOverlay" class="overlay-container" *ngIf="isEditing">
+      <div class="popup-box">
+        <h2>{{ popupTitle }}</h2>
+  
+        <!-- Getting Started Section -->
+        <div *ngIf="activeSection === 'gettingStarted'">
+          <p>Welcome to the Expense Tracker! Here’s how to get started:</p>
+          <ul>
+            <li>1. <strong>Create an Account:</strong> Go to the registration page and sign up using your email. A confirmation email will be sent.</li>
+            <li>2. <strong>Login:</strong> Once registered, log in using your credentials.</li>
+            <li>3. <strong>Dashboard Overview:</strong> After logging in, you will see your dashboard, which displays your expenses and budget summary.</li>
+          </ul>
+        </div>
+  
+        <!-- Account Management Section -->
+        <div *ngIf="activeSection === 'accountManagement'">
+          <p>In the account management section, you can:</p>
+          <ul>
+            <li>1. <strong>Change Password:</strong> Navigate to the account settings page to update your password.</li>
+            <li>2. <strong>Update Profile:</strong> Modify your personal information, such as name and email, from the account settings.</li>
+            <li>3. <strong>Logout:</strong> You can log out anytime by clicking the logout button on the top-right corner of your dashboard.</li>
+          </ul>
+        </div>
+  
+        <!-- Expense Management Section -->
+        <div *ngIf="activeSection === 'expenseManagement'">
+          <p>Manage your expenses effectively with these steps:</p>
+          <ul>
+            <li>1. <strong>Add an Expense:</strong> Click the "Add Expense" button on your dashboard and fill in the required fields such as category, amount, and date. Then, submit the form to save the expense.</li>
+            <li>2. <strong>Edit an Expense:</strong> Navigate to the "Expense History" section, where you can view all your past expenses. Click the edit icon next to any entry to modify the details.</li>
+            <li>3. <strong>Delete an Expense:</strong> If you want to remove an expense, click the delete icon next to the entry in the "Expense History" section.</li>
+          </ul>
+        </div>
+  
+        <!-- Reporting Section -->
+        <div *ngIf="activeSection === 'reporting'">
+          <p>Generate reports and analyze your spending patterns:</p>
+          <ul>
+            <li>1. <strong>View Reports:</strong> In the "Reports" section, you can generate summaries of your expenses by month, category, or custom date ranges.</li>
+            <li>2. <strong>Export Data:</strong> Use the "Export" feature to download reports in CSV or PDF format for external analysis.</li>
+            <li>3. <strong>Visualize Data:</strong> The dashboard includes graphical representations (bar charts, pie charts) of your expenses, powered by <em>Chart.js</em>. These graphs help you quickly understand your spending patterns over time.</li>
+          </ul>
+          <p>For example, a bar graph will show monthly expenses categorized into food, transport, utilities, etc., helping you identify areas of excessive spending.</p>
+        </div>
+  
+        <!-- Contact Section -->
+        <div *ngIf="activeSection === 'contact'">
+          <h3>Contact Us</h3>
+          <p>We're here to help! Reach out to us for any support:</p>
+          <ul>
+            <li><strong>Email:</strong> supportexpensetracker.com</li>
+            <li><strong>Phone:</strong> 9373342128</li>
+            <li><strong>Working Hours:</strong> Mon-Fri, 9 AM - 6 PM</li>
+          </ul>
+        </div>
+  
+        <button type="button" class="btn-close-popup" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+  
