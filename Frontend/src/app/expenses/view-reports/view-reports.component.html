@@ -1,1 +1,23 @@
-<p>view-reports works!</p>
+<div class="expense-report-container">
+    <h2 class="report-title">Expense Report</h2>
+    <div class="expense-report">
+      <div *ngFor="let category of getCategoryKeys()" class="category">
+        <h3>{{ category }}</h3>
+        <p>{{ report[category] | currency }}</p>
+        <button (click)="openDetailPopup(category)">View Details</button>
+      </div>
+    </div>
+</div>
+  
+<!-- Popup Overlay for Detailed Expenses (Billboard style) -->
+<div id="popupOverlay" class="overlay-container" *ngIf="isEditing">
+  <div class="popup-billboard">
+    <h3>{{ popupTitle }}</h3>
+    <ul>
+      <li *ngFor="let expense of detailedExpenses[popupCategory]">
+        {{ expense.description }} - {{ expense.amount | currency }} ({{ expense.date | date }})
+      </li>
+    </ul>
+    <button type="button" class="btn-close-popup" (click)="closePopup()">Close</button>
+  </div>
+</div>

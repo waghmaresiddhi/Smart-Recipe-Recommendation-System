@@ -15,6 +15,7 @@ export class ExpenseFormComponent implements OnInit {
   expenses: Expense[] = []; // The list of expenses
   categories: string[] = [
     'Groceries',
+    'Food',
     'Utilities',
     'Transportation',
     'Entertainment',
