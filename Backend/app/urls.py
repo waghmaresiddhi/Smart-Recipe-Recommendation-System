@@ -74,6 +74,7 @@ urlpatterns = [
     path("api/v1/bulk_todo/", include("bulk_todo.urls")),
     path("api/v1/ecommerce/", include("ecommerce.urls")),
     path('api/', include('expenses.urls')),
+     path('objectdetection/', include('objectdetection.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += [

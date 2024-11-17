@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "bulk_todo",
     "ecommerce",
     "expenses",
+    'objectdetection',
 ]
 
 MIDDLEWARE = [
